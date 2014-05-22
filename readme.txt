@@ -11,11 +11,13 @@ Link multiple network sites/blogs together - Maintain only one site list of user
 
 == Description ==
 
-'User Upgrade Capability' is a plugin to help with a multi-site network and helps with the administration of users and their roles. When you start using a multi-site WordPress installation you soon realise the power of having a separate site for a different function (e.g. main site, separate blog, separate calendar …etc).
+'User Upgrade Capability' is a plugin to help with a multi-site network and helps with the administration of users and their roles. When you start using a multi-site WordPress installation you soon realise the power of having the ability to use a separate site for different functions (e.g. main site, separate blog, separate calendar …etc) each can then be handled separately and even with different themes.
 
-You might think this is not required, however, one example comes from use of plugins that you wish run multiple times for a single site.  A common example is calendar plugins which use a fixed database table name, this means that you can’t install two calendars for different purposes on the same site.  Without 'User Upgrade Capabilities' or other methods this is a problem, but with the plugin you can create a new site and point back to the first re-using its user listing.
+However, without 'User Upgrade Capabilities' or other methods you would need to maintain user lists on each site and if it is the same group of users this can be an unwelcome overhead for administrators.  'User Upgrade Capability' helps with this admin task and allows you to create a new site and point back to a reference site re-using its user listing.
 
-A common example is calendar plugins which use a fixed database table name, this means that you can't install two calendars for different purposes on the same site.  Without  'User Upgrade Capabilities' or other methods this is a problem,  but with the plugin you can create a new site and point back to the first re-using its user listing, you can see an example in the picture here.  If one of the auto en-role extension plugins, available in the WordPress plugin repository is used then the user doesn't even know that the second calendar is a different site.
+One example of where this is helpful is for the case where you want multiple calendars for different purposes on the same site.  Calendar plugins generally use a fixed database table name, this means that you can't install two calendars on the same site.  With 'User Upgrade Capabilities' you can create a new site for each calendar and point back to the reference site re-using its user listing.  Also if one of the auto en-role extension plugins, available in the WordPress plugin repository is used then the user doesn't even know that the calendars are on a different site.
+
+You can find more detail on the plugin at the [Plugin site](http://justinandco.com/plugins/user-upgrade-capabilities/).
 
 Extensions:
 
@@ -25,8 +27,6 @@ If you select the options for extending functionality through other plugins the 
 * [Join My Multisite](http://wordpress.org/plugins/join-my-multisite/) for auto en-role of users.
 * [Blog Copier](http://wordpress.org/plugins/blog-copier/) for ease of duplicating sites.
 
-
-[Plugin site](http://justinandco.com/plugins/user-upgrade-capabilities/).
 
 == Installation ==
 
