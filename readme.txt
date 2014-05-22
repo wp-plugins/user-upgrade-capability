@@ -19,6 +19,8 @@ One example of where this is helpful is for the case where you want multiple cal
 
 You can find more detail on the plugin at the [Plugin site](http://justinandco.com/plugins/user-upgrade-capabilities/).
 
+= WARNING = Activating this plugin on a site will replace the available user roles/capabilities you will not be able to undo.
+
 Extensions:
 
 If you select the options for extending functionality through other plugins the following are available for ease of installing..
