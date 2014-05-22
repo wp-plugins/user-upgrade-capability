@@ -3,7 +3,7 @@
 Plugin Name: User Upgrade Capability
 Plugin URI: http://justinandco.com
 Description: Link multiple network sites/blogs together - Maintain only one site list of users.
-Version: 0.0
+Version: 1.0
 Author: Justin Fletcher
 Author URI: http://justinandco.com
 License: GPLv2 or later
