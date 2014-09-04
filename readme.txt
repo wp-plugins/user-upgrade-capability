@@ -2,7 +2,7 @@
 Contributors: justinticktock
 Tags: multisite, role, user, cms, groups, teams, access, capability, permission, security
 Requires at least: 3.5
-Tested up to: 3.9.1
+Tested up to: 4.0
 Stable tag: 1.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -44,6 +44,8 @@ If you select the options for extending functionality through other plugins the 
 1. The Settings Screen.
 
 == Changelog ==
+
+Change log is maintained on [the plugin website](http://justinandco.com/plugins/user-upgrade-capability-change-log/ "User Upgrade Capability – Change Log")
 
 = 1.0 =
 * Release into the wild.

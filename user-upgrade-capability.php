@@ -3,12 +3,12 @@
 Plugin Name: User Upgrade Capability
 Plugin URI: http://justinandco.com
 Description: Link multiple network sites/blogs together - Maintain only one site list of users.
-Version: 1.0
+Version: 1.1
 Author: Justin Fletcher
 Author URI: http://justinandco.com
 License: GPLv2 or later
 */
-
+	
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 /**
@@ -17,6 +17,21 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
  * Main Class which inits the CPTs and plugin
  */
 class UUC {
+
+	// Refers to a single instance of this class.
+    private static $instance = null;
+	
+    public	 $plugin_full_path;
+	public   $plugin_file = 'user-upgrade-capability/user-upgrade-capability.php';
+	
+	// Settings page slug	
+    public	 $menu = 'uuc-settings';
+	
+	// Settings Admin Menu Title
+    public	 $menu_title = 'Upgrade Capability';
+	
+	// Settings Page Title
+    public	 $page_title = 'Upgrade Capability';
     
     /**
 	 * __construct function.
@@ -25,7 +40,7 @@ class UUC {
 	 * @return void
 	 */
 	public function __construct() {
-
+		
 		// Set the constants needed by the plugin.
 		add_action( 'plugins_loaded', array( $this, 'constants' ), 1 );
 		
@@ -33,9 +48,6 @@ class UUC {
 		add_action( 'plugins_loaded', array( $this, 'includes' ), 2 );
 		
 		/* Hooks... */
-		
-		// A settings page to the admin acitve plugin listing
-		add_filter( 'plugin_action_links_' . plugin_basename( __FILE__ ), array( $this, 'action_links' ));
 
 		// Attached to set_current_user. Loads the plugin installer CLASS after themes are set-up to stop duplication of the CLASS.
 		// this should remain the hook until TGM-Plugin-Activation version 2.4.0 has had time to roll out to the majority of themes and plugins.
@@ -43,6 +55,8 @@ class UUC {
 		
 		// register admin side - Loads the textdomain, upgrade routine and menu item.
 		add_action( 'admin_init', array( $this, 'admin_init' ));
+       // add_action( 'admin_menu', array( $this, 'admin_menu' ) );
+
 		
 		// register the selected-active Help Note post types
 		add_action( 'init', array( $this, 'init' ));
@@ -51,13 +65,11 @@ class UUC {
 		add_action( 'admin_init', array( $this, 'deactivation_notice' ));
 		add_action( 'admin_notices', array( $this, 'action_admin_notices' ));
 		
+		
 		// Load user with new capabilities	
-		add_filter( 'template_include', array( $this, 'userupgradecapabilities_template'), 99 );
-
 		add_action('init', array( $this, 'override_wp_user_roles'));  
 				
 	}
-
 	
 	/**
 	 * Defines constants used by the plugin.
@@ -69,9 +81,8 @@ class UUC {
 		// Define constants
 		define( 'UUC_MYPLUGINNAME_PATH', plugin_dir_path( __FILE__ ) );
 		define( 'UUC_MYPLUGINNAME_FULL_PATH', UUC_MYPLUGINNAME_PATH . 'user-upgrade-capability.php' );
-		define( 'UUC_PLUGIN_DIR', plugin_dir_path( UUC_MYPLUGINNAME_PATH ) );
+		define( 'UUC_PLUGIN_DIR', trailingslashit( plugin_dir_path( UUC_MYPLUGINNAME_PATH )));
 		define( 'UUC_PLUGIN_URI', plugins_url('', __FILE__) );
-		define( 'UUC_SETTINGS_PAGE', 'uuc-settings');
 		
 		// admin prompt constants
 		define( 'UUC_PROMPT_DELAY_IN_DAYS', 30);
@@ -86,55 +97,11 @@ class UUC {
 	 */
 	public function includes() {
 
-
 		// settings 
 		//require_once( UUC_MYPLUGINNAME_PATH . 'includes/settings.php' );  
-		require_once( UUC_MYPLUGINNAME_PATH . 'includes/class-settings.php' );  
-		
-		// if selected install the plugin(s) and force activation
-		require_once( UUC_MYPLUGINNAME_PATH . 'includes/class-install-plugins.php' );    
-
+		require_once( UUC_MYPLUGINNAME_PATH . 'includes/settings.php' );  
 	
 	}
-
-	
-	/**
-	 * Append new links to the Plugin admin side
-	 *
-	 * @param array $links Current links/urls provided for the plugin admin.
-	 * @return array $links
-	 */
-	public function action_links( $links ) {
-		array_unshift( $links, '<a href="users.php?page=' . UUC_SETTINGS_PAGE . '">' . __( 'Settings' ) . "</a>" );
-		return $links;
-	}
-
-
-	public function userupgradecapabilities_template( $template ) {
-
-		// call the settings saved post-type to use in the expression to limit access
-		// First, we read the option collection  
-		$options = get_option('uuc_plugin_uuc_option');
-
-
-		// convert  to array delimiting by "," also trim off white space
-		$uuc_userupgradecapabilities_array =   array_map( 'trim',explode( ",", trim($options['uuc_current_capability'] )));  
-
-		if ( is_singular( $uuc_userupgradecapabilities_array) && !current_user_can( $options['uuc_capability'] ) )
-
-			if ( locate_template( array($options['uuc_template']) ) != '' ) {
-				// locate_template() returns path to file
-				// if either the child theme or the parent theme have overridden the template
-				$template = locate_template( array( $options['uuc_template']  ) );
-			}
-			 else {
-				// If neither the child nor parent theme have overridden the template,
-				// we load the template from the 'templates' sub-directory of the directory this file is in
-				$template = UUC_MYPLUGINNAME_PATH.'template/no-access.php';
-			}
-		return $template;
-	}
-
 	
 	/**
 	 * Initialise the plugin installs
@@ -144,10 +111,29 @@ class UUC {
 	public function set_current_user() {
 
 		// install the plugins and force activation if they are selected within the plugin settings
-		require_once( UUC_MYPLUGINNAME_PATH . 'includes/class-install-plugins.php' );    	
+		require_once( UUC_MYPLUGINNAME_PATH . 'includes/plugin-install.php' );
 		
 	}
+
         
+    /**
+	 * Initialise the plugin menu. 
+	 *
+	 * @return void
+	 */
+	public function admin_menu() {
+		//add_submenu_page( 'users.php' , __(  $this->page_title, 'user-upgrade-capabilty-text-domain' ),  __( $this->menu_title, 'songbook-text-domain' ),  'edit_users', $this->menu, array( &$this, 'sub_menu_page' ) );
+	}
+    
+	/**
+	 * sub_menu_page: 
+	 *
+	 * @return void
+	 */
+	public function sub_menu_page() {
+		// 
+	}	
+	
 	/**
 	 * Initialise the plugin by handling upgrades and loading the text domain. 
 	 *
@@ -169,6 +155,10 @@ class UUC {
 
 			// set default options if not already set..
 			$this->do_on_activation();
+
+			// create the plugin_version store option if not already present.
+			$plugin_version = self::plugin_get_version();
+			update_option('uuc_plugin_version', $plugin_version ); 
 			
 			// Update the option again after uuc_upgrade() changes and set the current plugin revision	
 			update_option('uuc_plugin_version', $plugin_new_version ); 
@@ -185,12 +175,14 @@ class UUC {
 	 */
 	public function uuc_upgrade( $current_plugin_version ) {
 		
-		// move current database stored values into the next structure
-		if ( $current_plugin_version < '1.1.1.1.1.1' ) {
+		/*
+		// upgrade code when required.
+		if ( $current_plugin_version < '1.0' ) {
 
 			delete_option('help_note_caps_created');
 
 		}
+		*/
 	}
 
 	/**
@@ -202,19 +194,8 @@ class UUC {
 	public function init() {
 		
 		$this->action_init_store_user_meta();
-
-		/**
-		 * Init settings class
-		 */
-		$uuc_settings = new UUC_Settings();
-
-		if (class_exists( 'UUC_EXTRA_Settings' )) {
-			$uuc_settings->registerHandler(new UUC_EXTRA_Settings_Additional_Methods());
-		}
 			
 	}
-
-
 
 	/**
 	 * Add capabilities and Flush your rewrite rules for plugin activation.
@@ -222,14 +203,13 @@ class UUC {
 	 * @access public
 	 * @return $settings
 	 */	
-	public function do_on_activation() {
+	static function do_on_activation() {
 
 		// Record plugin activation date.
 		add_option('uuc_install_date',  time() ); 
-		
-		// create the plugin_version store option if not already present.
-		$plugin_version = $this->plugin_get_version();
-		update_option('uuc_plugin_version', $plugin_version ); 
+
+		// Add protection activation by clearing the reference site and so initially disabling the plugin
+		update_option('uuc_reference_site',  '0' ); 
 
 		flush_rewrite_rules();
 	}
@@ -240,14 +220,14 @@ class UUC {
 	 * @access public
 	 * @return $plugin_version
 	 */	
-	public function plugin_get_version() {
-		$plugin_data = get_plugin_data( UUC_MYPLUGINNAME_FULL_PATH );	
+	static function plugin_get_version() {
+
+		$plugin_data = get_plugin_data( UUC_MYPLUGINNAME_FULL_PATH, false, false );	
+
 		$plugin_version = $plugin_data['Version'];	
 		return filter_var($plugin_version, FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
 	}
 
-	
-		
 	/**
 	 * Register Plugin Deactivation Hooks for all the currently 
 	 * enforced active extension plugins.
@@ -258,7 +238,7 @@ class UUC {
 	public function deactivation_notice() {
 
 		// loop plugins forced active.
-		$plugins = UUC_Settings::install_plugins();
+		$plugins = UUC_Settings::get_instance()->selected_plugins( 'uuc_plugin_extension' );
 
 		foreach ( $plugins as $plugin ) {
 			$plugin_file = UUC_PLUGIN_DIR . $plugin["slug"] . '\\' . $plugin['slug'] . '.php' ;
@@ -294,7 +274,7 @@ class UUC {
 	public function action_admin_notices() {
 
 		// loop plugins forced active.
-		$plugins = UUC_Settings::install_plugins();
+		$plugins = UUC_Settings::get_instance()->selected_plugins( 'uuc_plugin_extension' );
 
 		// for each extension plugin enabled (forced active) add a error message for deactivation.
 		foreach ( $plugins as $plugin ) {
@@ -439,15 +419,9 @@ class UUC {
 
 			global $table_prefix;
 
-
 			// Collect the site roles defined in the network primary reference site 
 			// wp_ used here is not the table prefix but the option-name prefix and so doesn't change along with the $table_prefix
 			$jmf_wp_user_roles = get_blog_option( $primary_ref_site, $primary_ref_site_table_prefix . 'user_roles' );
-
-//echo var_dump("get_blog_option( $primary_ref_site, $primary_ref_site_table_prefix . 'user_roles'  )") ;    		
-//echo var_dump($jmf_wp_user_roles) ;        	
-//echo var_dump("update_option( $table_prefix . 'user_roles', $jmf_wp_user_roles )") ;   
-
 
 			// Update the current local site defined roles to match
 			update_option( $table_prefix . 'user_roles', $jmf_wp_user_roles );    
@@ -455,7 +429,7 @@ class UUC {
 			// Now based on the current user having a capability within the base site start to open up more capability within this site     
 			if( $key_capability . '' == '' ) {
 				// if no explicit capability is defined use the site url path name ( this allows a level of flexibility on automatically looking for a named capability without the need to set this option manually )
-				$site_inital_required_capability = ltrim( parse_url( get_bloginfo( 'siteurl' ), PHP_URL_PATH ), '/' ); 
+				$site_inital_required_capability = basename( site_url() );
 			} else {
 				// otherwise use the capability defined
 				$site_inital_required_capability = $key_capability; 
@@ -464,7 +438,7 @@ class UUC {
 
 			// check for the capability on the base site
 			if ( current_user_can_for_blog( $primary_ref_site, $site_inital_required_capability )) {
-				
+//die("i can");			
 				$user = new WP_User( get_current_user_id() );
 																									
 				// add the key capability for the current site
@@ -486,12 +460,30 @@ class UUC {
 			}
 		}
 	}
+	
+
+	/**
+     * Creates or returns an instance of this class.
+     *
+     * @return   A single instance of this class.
+     */
+    public static function get_instance() {
+ 
+        if ( null == self::$instance ) {
+            self::$instance = new self;
+        }
+ 
+        return self::$instance;
+ 
+    }		
 }
+
+register_activation_hook( __FILE__, array( 'UUC', 'do_on_activation' ) );
 
 /**
  * Init Upgrade User Capability class
  */
  
-$UUC = new UUC();
+UUC::get_instance();
 
 ?>
