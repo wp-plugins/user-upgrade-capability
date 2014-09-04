@@ -47,7 +47,4 @@ If you select the options for extending functionality through other plugins the 
 
 Change log is maintained on [the plugin website](http://justinandco.com/plugins/user-upgrade-capability-change-log/ "User Upgrade Capability – Change Log")
 
-= 1.0 =
-* Release into the wild.
-
 == Upgrade Notice ==
