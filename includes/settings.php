@@ -80,13 +80,13 @@ class UUC_Settings {
 			array(
 				'uuc_general' => array(
 					'title' 		=> __( 'General', 'user-upgrade-capability-text-domain' ),
-					'description' 	=> __( 'The "User Upgrade Capability" plugin simplifies the administration of user capabilities and allows several sites/blogs to have access rights cascaded out from one reference site.  Define here the capabilities that a user will receive for this site if they already have a single "key" capability on a reference site/blog within the multi-site network.  On user login to the current local site the plugin will expand the local capabilities to include those listed below. If the "key" reference capability is removed from the user at the reference site then all capabilities will be removed from this site the user will need to re-enrole. ( the plugin is intended to be used with plugins listed under the "Plugin Extensions" tab ).', 'user-upgrade-capability-text-domain' ),
+					'description' 	=> __( 'The "User Upgrade Capability" plugin simplifies the administration of user capabilities and allows several sites/blogs to have access rights cascaded out from one reference site.', 'user-upgrade-capability-text-domain' ),
 					'settings' 		=> array(		
 											array(
 												'name' 		=> 'uuc_reference_site',
 												'std' 		=> '0',
 												'label' 	=> __( 'Reference Site', 'user-upgrade-capability-text-domain' ),
-												'desc'		=> __( 'WARNING !! changing this setting will replace this site available roles/capabilities from the reference site selected YOU CANNOT UNDO.  Only change this option on new sites or when you a wish to do so.  (If left as "-none-" this plugin will be disabled).', 'user-upgrade-capability-text-domain' ),
+												'desc'		=> __( 'WARNING !! changing this setting will replace this site available roles/capabilities from the reference site selected YOU CANNOT UNDO.  Only change this option on new sites or when you wish to do so.  (If left as "-none-" this plugin will be disabled).', 'user-upgrade-capability-text-domain' ),
 												'type'      => 'field_site_list_option',
 												),
 											array(
@@ -95,6 +95,12 @@ class UUC_Settings {
 												'label' 	=> __( 'Reference Site Key Capability', 'user-upgrade-capability-text-domain' ),
 												'desc'		=> __( 'If left blank the site name will be used to search for as the capability on the reference site.', 'user-upgrade-capability-text-domain' ),
 												),													
+										),										
+				),
+				'uuc_user_capabilities' => array(
+					'title' 		=> __( 'User Capability', 'user-upgrade-capability-text-domain' ),
+					'description' 	=> __( 'Define here the capabilities that a user will receive for this site if they already have a single "key" capability on a reference site/blog within the multi-site network.  On user login to the current local site the plugin will expand the local capabilities to include those listed below. If the "key" reference capability is removed from the user at the reference site then all capabilities will be removed from this site the user will need to re-enrole.', 'user-upgrade-capability-text-domain' ),
+					'settings' 		=> array(														
 											array(
 												'columns'   => "45",
 												'rows'   	=> "8",
