@@ -1,7 +1,7 @@
 <?php
 /**
 Plugin Name: User Upgrade Capability
-Plugin URI: http://justinandco.com
+Plugin URI: http://justinandco.com/plugins/user-upgrade-capabilities/
 Description: Link multiple network sites/blogs together - Maintain only one site list of users.
 Version: 1.1.1
 Author: Justin Fletcher
