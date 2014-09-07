@@ -3,7 +3,7 @@
 Plugin Name: User Upgrade Capability
 Plugin URI: http://justinandco.com
 Description: Link multiple network sites/blogs together - Maintain only one site list of users.
-Version: 1.1
+Version: 1.1.1
 Author: Justin Fletcher
 Author URI: http://justinandco.com
 License: GPLv2 or later
@@ -387,7 +387,7 @@ class UUC {
 			if ( in_array( "doing_now", (array_values((array)$user_user_hide_message ))))  {
 				$next_prompt_time = time() + ( 60*60*24*  UUC_PROMPT_DELAY_IN_DAYS ) ;
 				update_user_meta( get_current_user_id(), 'uuc_prompt_timeout' , $next_prompt_time );
-				wp_redirect( 'http://wordpress.org/support/view/plugin-reviews/upgrade-user-capability' );
+				wp_redirect( 'http://wordpress.org/support/view/plugin-reviews/user-upgrade-capability' );
 				exit;					
 			}
 
@@ -438,7 +438,7 @@ class UUC {
 
 			// check for the capability on the base site
 			if ( current_user_can_for_blog( $primary_ref_site, $site_inital_required_capability )) {
-//die("i can");			
+	
 				$user = new WP_User( get_current_user_id() );
 																									
 				// add the key capability for the current site
