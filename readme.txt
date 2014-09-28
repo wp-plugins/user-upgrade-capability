@@ -41,7 +41,9 @@ If you select the options for extending functionality through other plugins the 
 
 == Screenshots ==
 
-1. The Settings Screen.
+1. The General Settings Screen.
+2. The Additional User Capabilities Settings Screen.
+3. The Plugin Extensions Settings Screen.
 
 == Changelog ==
 
