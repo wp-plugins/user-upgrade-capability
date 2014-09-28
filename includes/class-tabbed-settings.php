@@ -3,10 +3,12 @@
  * Plugin tabbed settings option class for WordPress themes.
  *
  * @package   class-tabbed-settings.php
- * @version   1.1.1
+ * @version   1.1.2
  * @author    Justin Fletcher <justin@justinandco.com>
  * @copyright Copyright (c) 2014, Justin Fletcher
  * @license   http://opensource.org/licenses/gpl-2.0.php GPL v2 or later
+ *
+ * The text domain must be manually replaced with the plugin text domain.
  */
 
  
@@ -264,7 +266,7 @@ if ( ! class_exists( 'Tabbed_Settings' ) ) {
 			?>
 			<form action="<?php site_url(); ?>" method="get">
 			<?php wp_dropdown_pages(array(
-										'show_option_none' => __( "- None -", 'role-based-help-notes-text-domain' ), 
+										'show_option_none' => _x( '- None -', 'Nothing has been selected', 'user-upgrade-capability' ), 
 										'option_none_value' => '0', 
 										'sort_order'   => 'ASC',
 										'sort_column'  => 'post_title',
@@ -303,16 +305,16 @@ if ( ! class_exists( 'Tabbed_Settings' ) ) {
 			}
 
 			if ( ! file_exists( $plugin_main_file ) ) {
-				echo esc_html__( 'Enable to prompt installation and force active.', 'role-based-help-notes-text-domain' ) . ' ( ';
-				if ( $value ) echo '  <a href="' . add_query_arg( 'page', TGM_Plugin_Activation::$instance->menu, admin_url( 'themes.php' ) ) . '">' .  esc_html__( "Install", 'role-based-help-notes-text-domain' ) . " </a> | " ;
+				echo esc_html__( 'Enable to prompt installation and force active.', 'user-upgrade-capability' ) . ' ( ';
+				if ( $value ) echo '  <a href="' . add_query_arg( 'page', TGM_Plugin_Activation::$instance->menu, admin_url( 'themes.php' ) ) . '">' .  _x( 'Install', 'Install the Plugin', 'user-upgrade-capability' ) . " </a> | " ;
 				
 			} elseif ( is_plugin_active( $option['slug'] . '/' . $option['slug'] . '.php' ) &&  ! is_plugin_active_for_network( $option['slug'] . '/' . $option['slug'] . '.php' )) {
-				echo esc_html__(  'Force Active', 'role-based-help-notes-text-domain' ) . ' ( ';
-				if ( ! $value ) echo '<a href="plugins.php?s=' . esc_html( $option['label'] )	 . '">' .  esc_html__( "Deactivate", 'role-based-help-notes-text-domain' ) . "</a> | " ;	
+				echo esc_html__(  'Force Active', 'user-upgrade-capability' ) . ' ( ';
+				if ( ! $value ) echo '<a href="plugins.php?s=' . esc_html( $option['label'] )	 . '">' .  _x( 'Deactivate', 'deactivate the plugin', 'user-upgrade-capability' ) . "</a> | " ;	
 			} else {
-				echo esc_html__(  'Force Active', 'role-based-help-notes-text-domain' ) . ' ( ';
+				echo esc_html__(  'Force Active', 'user-upgrade-capability' ) . ' ( ';
 			}
-			echo ' <a href="http://wordpress.org/plugins/' . esc_html( $option['slug'] ) . '">' .  esc_html__( "wordpress.org", 'role-based-help-notes-text-domain' ) . " </a> )" ;		
+			echo ' <a href="http://wordpress.org/plugins/' . esc_html( $option['slug'] ) . '">' .  esc_html__( "wordpress.org", 'user-upgrade-capability' ) . " </a> )" ;		
 			?></label><?php
 			if ( ! empty( $option['desc'] ))
 				echo ' <p class="description">' . esc_html( $option['desc'] ) . '</p>';
@@ -430,8 +432,6 @@ if ( ! class_exists( 'Tabbed_Settings' ) ) {
 		
 	}
 	
-    // Ensure only one instance of the class is ever invoked.
-	//Tabbed_Settings::get_instance();
 }
 
 ?>

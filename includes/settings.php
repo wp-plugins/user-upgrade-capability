@@ -49,11 +49,9 @@ class UUC_Settings {
 	 *
 	 * @access public
 	 * @return void
-	 */	 
+	 */
 	public function add_admin_menus() {
-	//	add_options_page( __( $this->page_title, 'role-based-help-notes-text-domain' ), __( $this->menu_title, 'role-based-help-notes-text-domain' ), 'manage_options', $this->menu, array( $this, 'plugin_options_page' ) );
-	echo var_dump(UUC_Settings::get_instance());
-		//add_submenu_page( 'users.php', __( 'Upgrade User Capability', 'user-upgrade-capability-text-domain' ), __( 'Upgrade Capability', 'user-upgrade-capability-text-domain' ), 'manage_network_users', $this->menu, array( &$this, 'plugin_options_page' )
+
 		add_submenu_page( 'users.php', __( 'Upgrade User Capability', 'user-upgrade-capability-text-domain' ), __( 'Upgrade Capability', 'user-upgrade-capability-text-domain' ), 'manage_network_users', UUC_Settings::get_instance()->menu, array( $this, 'plugin_options_page' ) );	
 	}
 	
@@ -68,7 +66,6 @@ class UUC_Settings {
 		
 		$config = array(
 				'default_tab_key' => 'uuc_general',					// Default settings tab, opened on first settings page open.
-				//'menu_parent' => 'options-general.php',    		// menu options page slug name.
 				'menu_parent' => 'users.php',    					// menu options page slug name.
 				'menu_access_capability' => 'manage_network_users',    					// menu options page slug name.
 				'menu' => $upgrade_user->menu,    					// menu options page slug name.
@@ -120,7 +117,6 @@ class UUC_Settings {
 													'name' 		=> 'uuc_user_role_editor_plugin',
 													'std' 		=> false,
 													'label' 	=> 'User Role Editor',
-													'cb_label'  => __( 'Enable', 'user-upgrade-capability-text-domain' ),
 													'desc'		=> __( "This plugin gives the ability to edit users capabilities.  Once installed go to menu [users]..[User Role Editor].", 'user-upgrade-capability-text-domain' ),
 													'type'      => 'field_plugin_checkbox_option',
 													// the following are for tgmpa_register activation of the plugin
@@ -134,7 +130,6 @@ class UUC_Settings {
 													'name' 		=> 'uuc_join_my_multisite_plugin',
 													'std' 		=> false,
 													'label' 	=> 'Join My Multi-site',
-													'cb_label'  => __( 'Enable', 'user-upgrade-capability-text-domain' ),
 													'desc'		=> __( "This plugin allows for users to auto en-role on sites.  Once installed go to menu [users]..[Join My Multisite].", 'user-upgrade-capability-text-domain' ),
 													'type'      => 'field_plugin_checkbox_option',
 													// the following are for tgmpa_register activation of the plugin
@@ -149,7 +144,6 @@ class UUC_Settings {
 													'name' 		=> 'uuc_blog_copier_plugin',
 													'std' 		=> false,
 													'label' 	=> 'Blog Copier',
-													'cb_label'  => __( 'Enable', 'user-upgrade-capability-text-domain' ),
 													'desc'		=> __( "This is optional and is very helpful in the creation of new sites by simply copying an existing site, you can then create template sites for re-use.  Once installed go to the main Network..[sites]...[Blog Copier]", 'user-upgrade-capability-text-domain' ),
 													'type'      => 'field_plugin_checkbox_option',
 													// the following are for tgmpa_register activation of the plugin

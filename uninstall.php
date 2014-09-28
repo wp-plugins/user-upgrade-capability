@@ -17,6 +17,11 @@ if (is_multisite()) {
 } else {
 		uuc_clean_database();
 }
+
+// remove all network-wide transients
+delete_site_transient( 'uuc_blog_list' );
+delete_site_transient( 'uuc_active_plugins' );
+	
 		
 // remove all database entries for currently active blog on uninstall.
 function uuc_clean_database() {
