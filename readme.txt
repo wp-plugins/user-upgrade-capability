@@ -3,7 +3,7 @@ Contributors: justinticktock
 Tags: multisite, role, user, cms, groups, teams, access, capability, permission, security
 Requires at least: 3.5
 Tested up to: 4.0
-Stable tag: 1.1.1
+Stable tag: 1.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -41,7 +41,9 @@ If you select the options for extending functionality through other plugins the 
 
 == Screenshots ==
 
-1. The Settings Screen.
+1. The General Settings Screen.
+2. The Additional User Capabilities Settings Screen.
+3. The Plugin Extensions Settings Screen.
 
 == Changelog ==
 
