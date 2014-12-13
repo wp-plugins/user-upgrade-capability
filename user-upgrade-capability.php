@@ -3,7 +3,7 @@
 Plugin Name: User Upgrade Capability
 Plugin URI: http://justinandco.com/plugins/user-upgrade-capabilities/
 Description: Link multiple network sites/blogs together - Maintain only one site list of users.
-Version: 1.2.1
+Version: 1.2.1.1
 Author: Justin Fletcher
 Author URI: http://justinandco.com
 Domain Path: /languages/
@@ -43,20 +43,16 @@ class UUC {
 		// Load the textdomain.
 		add_action( 'plugins_loaded', array( $this, 'i18n' ), 1 );
 
-		
-
-		// Attached to set_current_user. Loads the plugin installer CLASS after themes are set-up to stop duplication of the CLASS.
-		// this should remain the hook until TGM-Plugin-Activation version 2.4.0 has had time to roll out to the majority of themes and plugins.
-		add_action( 'set_current_user', array( $this, 'set_current_user' ));
-		//add_action( 'plugins_loaded', array( $this, 'set_current_user' ), 1 );
-		
-
 		// Set the constants needed by the plugin.
 		add_action( 'plugins_loaded', array( $this, 'constants' ), 2 );
 		
 		// Load the functions files.
 		add_action( 'plugins_loaded', array( $this, 'includes' ), 3 );
 
+		// Attached to after_setup_theme. Loads the plugin installer CLASS after themes are set-up to stop duplication of the CLASS.
+		// this should remain the hook until TGM-Plugin-Activation version 2.4.0 has had time to roll out to the majority of themes and plugins.
+		add_action( 'after_setup_theme', array( $this, 'after_setup_theme' ));
+		
 		// register admin side - upgrade routine and menu item.
 		add_action( 'admin_init', array( $this, 'admin_init' ));
 
@@ -66,7 +62,6 @@ class UUC {
 		
 		// Load user with new capabilities on login.
 		add_action('init', array( $this, 'override_wp_user_caps'));  
-
 	}
 	
 	/**
@@ -109,7 +104,7 @@ class UUC {
 	 *
 	 * @return void
 	 */
-	public function set_current_user() {
+	public function after_setup_theme() {
 
 		// install the plugins and force activation if they are selected within the plugin settings
 		require_once( UUC_MYPLUGINNAME_PATH . 'includes/plugin-install.php' );
@@ -305,7 +300,7 @@ class UUC {
 			?>
 			<div class="error">
 				  <p><?php esc_html_e(sprintf( __( 'Error the %1$s plugin is forced active with ', 'user-upgrade-capability'), $plugin)); ?>
-				  <a href="options-general.php?page=<?php echo $this->menu ; ?>&tab=uuc_plugin_extension"> <?php echo esc_html(__( 'User Upgrade Capability Settings!', 'user-upgrade-capability')); ?> </a></p>
+				  <a href="users.php?page=<?php echo $this->menu ; ?>&tab=uuc_plugin_extension"> <?php echo esc_html(__( 'User Upgrade Capability Settings!', 'user-upgrade-capability')); ?> </a></p>
 			</div>
 			<?php
 			update_option("uuc_deactivate_{$plugin}", false); 
