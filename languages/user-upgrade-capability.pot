@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: User Upgrade Capability 1.2\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/tag/user-upgrade-capability\n"
-"POT-Creation-Date: 2014-12-12 16:28:08+00:00\n"
+"POT-Creation-Date: 2014-12-13 11:59:03+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -13,42 +13,42 @@ msgstr ""
 "Language-Team: LANGUAGE <LL@li.org>\n"
 
 #: includes/class-tabbed-settings.php:269
-msgctxt "Nothing has been selected"
+msgctxt "text for no page selected"
 msgid "- None -"
 msgstr ""
 
-#: includes/class-tabbed-settings.php:308
+#: includes/class-tabbed-settings.php:304
 msgid "Enable to prompt installation and force active."
 msgstr ""
 
-#: includes/class-tabbed-settings.php:309
+#: includes/class-tabbed-settings.php:305
 msgctxt "Install the Plugin"
 msgid "Install"
 msgstr ""
 
-#: includes/class-tabbed-settings.php:312
-#: includes/class-tabbed-settings.php:315
+#: includes/class-tabbed-settings.php:308
+#: includes/class-tabbed-settings.php:311
 msgid "Force Active"
 msgstr ""
 
-#: includes/class-tabbed-settings.php:313
+#: includes/class-tabbed-settings.php:309
 msgctxt "deactivate the plugin"
 msgid "Deactivate"
 msgstr ""
 
-#: includes/class-tabbed-settings.php:317
+#: includes/class-tabbed-settings.php:313
 msgid "wordpress.org"
 msgstr ""
 
-#: includes/class-tgm-plugin-activation.php:161 includes/plugin-install.php:26
+#: includes/class-tgm-plugin-activation.php:161 includes/plugin-install.php:24
 msgid "Install Required Plugins"
 msgstr ""
 
-#: includes/class-tgm-plugin-activation.php:162 includes/plugin-install.php:27
+#: includes/class-tgm-plugin-activation.php:162 includes/plugin-install.php:25
 msgid "Install Plugins"
 msgstr ""
 
-#: includes/class-tgm-plugin-activation.php:163 includes/plugin-install.php:28
+#: includes/class-tgm-plugin-activation.php:163 includes/plugin-install.php:26
 msgid "Installing Plugin: %s"
 msgstr ""
 
@@ -56,19 +56,19 @@ msgstr ""
 msgid "Something went wrong."
 msgstr ""
 
-#: includes/class-tgm-plugin-activation.php:165 includes/plugin-install.php:30
+#: includes/class-tgm-plugin-activation.php:165 includes/plugin-install.php:28
 msgid "This theme requires the following plugin: %1$s."
 msgid_plural "This theme requires the following plugins: %1$s."
 msgstr[0] ""
 msgstr[1] ""
 
-#: includes/class-tgm-plugin-activation.php:166 includes/plugin-install.php:31
+#: includes/class-tgm-plugin-activation.php:166 includes/plugin-install.php:29
 msgid "This theme recommends the following plugin: %1$s."
 msgid_plural "This theme recommends the following plugins: %1$s."
 msgstr[0] ""
 msgstr[1] ""
 
-#: includes/class-tgm-plugin-activation.php:167 includes/plugin-install.php:32
+#: includes/class-tgm-plugin-activation.php:167 includes/plugin-install.php:30
 msgid ""
 "Sorry, but you do not have the correct permissions to install the %s plugin. "
 "Contact the administrator of this site for help on getting the plugin "
@@ -80,19 +80,19 @@ msgid_plural ""
 msgstr[0] ""
 msgstr[1] ""
 
-#: includes/class-tgm-plugin-activation.php:168 includes/plugin-install.php:33
+#: includes/class-tgm-plugin-activation.php:168 includes/plugin-install.php:31
 msgid "The following required plugin is currently inactive: %1$s."
 msgid_plural "The following required plugins are currently inactive: %1$s."
 msgstr[0] ""
 msgstr[1] ""
 
-#: includes/class-tgm-plugin-activation.php:169 includes/plugin-install.php:34
+#: includes/class-tgm-plugin-activation.php:169 includes/plugin-install.php:32
 msgid "The following recommended plugin is currently inactive: %1$s."
 msgid_plural "The following recommended plugins are currently inactive: %1$s."
 msgstr[0] ""
 msgstr[1] ""
 
-#: includes/class-tgm-plugin-activation.php:170 includes/plugin-install.php:35
+#: includes/class-tgm-plugin-activation.php:170 includes/plugin-install.php:33
 msgid ""
 "Sorry, but you do not have the correct permissions to activate the %s "
 "plugin. Contact the administrator of this site for help on getting the "
@@ -104,7 +104,7 @@ msgid_plural ""
 msgstr[0] ""
 msgstr[1] ""
 
-#: includes/class-tgm-plugin-activation.php:171 includes/plugin-install.php:36
+#: includes/class-tgm-plugin-activation.php:171 includes/plugin-install.php:34
 msgid ""
 "The following plugin needs to be updated to its latest version to ensure "
 "maximum compatibility with this theme: %1$s."
@@ -114,7 +114,7 @@ msgid_plural ""
 msgstr[0] ""
 msgstr[1] ""
 
-#: includes/class-tgm-plugin-activation.php:172 includes/plugin-install.php:37
+#: includes/class-tgm-plugin-activation.php:172 includes/plugin-install.php:35
 msgid ""
 "Sorry, but you do not have the correct permissions to update the %s plugin. "
 "Contact the administrator of this site for help on getting the plugin "
@@ -126,34 +126,35 @@ msgid_plural ""
 msgstr[0] ""
 msgstr[1] ""
 
-#: includes/class-tgm-plugin-activation.php:173 includes/plugin-install.php:38
+#: includes/class-tgm-plugin-activation.php:173 includes/plugin-install.php:36
 msgid "Begin installing plugin"
 msgid_plural "Begin installing plugins"
 msgstr[0] ""
 msgstr[1] ""
 
-#: includes/class-tgm-plugin-activation.php:174 includes/plugin-install.php:39
+#: includes/class-tgm-plugin-activation.php:174 includes/plugin-install.php:37
 msgid "Begin activating plugin"
 msgid_plural "Begin activating plugins"
 msgstr[0] ""
 msgstr[1] ""
 
-#: includes/class-tgm-plugin-activation.php:175 includes/plugin-install.php:40
+#: includes/class-tgm-plugin-activation.php:175 includes/plugin-install.php:38
 msgid "Return to Required Plugins Installer"
 msgstr ""
 
-#: includes/class-tgm-plugin-activation.php:176
+#: includes/class-tgm-plugin-activation.php:176 includes/plugin-install.php:39
 msgid "Return to the dashboard"
 msgstr ""
 
 #: includes/class-tgm-plugin-activation.php:177
 #: includes/class-tgm-plugin-activation.php:1945
-#: includes/plugin-install.php:41
+#: includes/plugin-install.php:40
 msgid "Plugin activated successfully."
 msgstr ""
 
 #: includes/class-tgm-plugin-activation.php:178
 #: includes/class-tgm-plugin-activation.php:1636
+#: includes/plugin-install.php:41
 msgid "The following plugin was activated successfully:"
 msgstr ""
 
@@ -161,7 +162,7 @@ msgstr ""
 msgid "All plugins installed and activated successfully. %1$s"
 msgstr ""
 
-#: includes/class-tgm-plugin-activation.php:180
+#: includes/class-tgm-plugin-activation.php:180 includes/plugin-install.php:43
 msgid "Dismiss this notice"
 msgstr ""
 
@@ -313,7 +314,7 @@ msgid "Installing Plugin %1$s (%2$d/%3$d)"
 msgstr ""
 
 #: includes/class-user-upgrade-capability-network-info.php:76
-msgid "Manage User Upgrade Capability on "
+msgid "Manage User Upgrade Capability on"
 msgstr ""
 
 #: includes/class-user-upgrade-capability-network-info.php:91
@@ -324,7 +325,7 @@ msgstr ""
 msgid "Upgrade User Capability - Linked Secondary Sites"
 msgstr ""
 
-#: includes/plugin-install.php:29
+#: includes/plugin-install.php:27
 msgid "Something went wrong with the plugin API."
 msgstr ""
 
@@ -400,7 +401,7 @@ msgid "Put each capability on a separate row."
 msgstr ""
 
 #: includes/settings.php:113
-msgid "Plugin Extensions"
+msgid "Plugin Suggestions"
 msgstr ""
 
 #: includes/settings.php:114
@@ -431,25 +432,30 @@ msgid ""
 "Once installed go to the main Network..[sites]...[Blog Copier]"
 msgstr ""
 
-#: user-upgrade-capability.php:300
+#: includes/settings.php:209
+msgctxt "text for no site selected"
+msgid "- None -"
+msgstr ""
+
+#: user-upgrade-capability.php:308
 msgid "User Upgrade Capability Settings!"
 msgstr ""
 
-#: user-upgrade-capability.php:342
+#: user-upgrade-capability.php:350
 msgid ""
 "You've been using <b>Upgrade User Capability</b> for more than %s.  How "
 "about giving it a review by logging in at wordpress.org ?"
 msgstr ""
 
-#: user-upgrade-capability.php:347
+#: user-upgrade-capability.php:355
 msgid "Yes, please take me there."
 msgstr ""
 
-#: user-upgrade-capability.php:349
+#: user-upgrade-capability.php:357
 msgid "Not right now thanks."
 msgstr ""
 
-#: user-upgrade-capability.php:353
+#: user-upgrade-capability.php:361
 msgid "I've already done this !"
 msgstr ""
 
