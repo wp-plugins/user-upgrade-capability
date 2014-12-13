@@ -6,7 +6,6 @@ Description: Link multiple network sites/blogs together - Maintain only one site
 Version: 1.2
 Author: Justin Fletcher
 Author URI: http://justinandco.com
-Text Domain: user-upgrade-capability
 Domain Path: /languages/
 License: GPLv2 or later
 */
@@ -40,29 +39,32 @@ class UUC {
 	 * @return void
 	 */
 	public function __construct() {
+
+		// Load the textdomain.
+		add_action( 'plugins_loaded', array( $this, 'i18n' ), 1 );
+
 		
-		// Set the constants needed by the plugin.
-		add_action( 'plugins_loaded', array( $this, 'constants' ), 1 );
-		
-		/* Load the functions files. */
-		add_action( 'plugins_loaded', array( $this, 'includes' ), 2 );
-		
-		/* Hooks... */
 
 		// Attached to set_current_user. Loads the plugin installer CLASS after themes are set-up to stop duplication of the CLASS.
 		// this should remain the hook until TGM-Plugin-Activation version 2.4.0 has had time to roll out to the majority of themes and plugins.
 		add_action( 'set_current_user', array( $this, 'set_current_user' ));
+		//add_action( 'plugins_loaded', array( $this, 'set_current_user' ), 1 );
 		
-		// register admin side - Loads the textdomain, upgrade routine and menu item.
+
+		// Set the constants needed by the plugin.
+		add_action( 'plugins_loaded', array( $this, 'constants' ), 2 );
+		
+		// Load the functions files.
+		add_action( 'plugins_loaded', array( $this, 'includes' ), 3 );
+
+		// register admin side - upgrade routine and menu item.
 		add_action( 'admin_init', array( $this, 'admin_init' ));
-       // add_action( 'admin_menu', array( $this, 'admin_menu' ) );
 
 		// Load admin error messages	
 		add_action( 'admin_init', array( $this, 'deactivation_notice' ));
 		add_action( 'admin_notices', array( $this, 'action_admin_notices' ));
 		
 		// Load user with new capabilities on login.
-		//add_action('wp_login', array( $this, 'override_wp_user_caps'));  
 		add_action('init', array( $this, 'override_wp_user_caps'));  
 
 	}
@@ -94,7 +96,6 @@ class UUC {
 	public function includes() {
 
 		// settings 
-		//require_once( UUC_MYPLUGINNAME_PATH . 'includes/settings.php' );  
 		require_once( UUC_MYPLUGINNAME_PATH . 'includes/settings.php' );  
 		
 
@@ -145,7 +146,7 @@ class UUC {
 		$this->action_init_store_user_meta();
 		
 		$plugin_current_version = get_option( 'uuc_plugin_version' );
-		$plugin_new_version =  $this->plugin_get_version();
+		$plugin_new_version =  self::plugin_get_version();
 		
 		// Admin notice hide prompt notice catch
 		$this->catch_hide_notice();
@@ -166,10 +167,17 @@ class UUC {
 			// Update the option again after uuc_upgrade() changes and set the current plugin revision	
 			update_option('uuc_plugin_version', $plugin_new_version ); 
 		}
-			
-		load_plugin_textdomain('user-upgrade-capability-text-domain', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
 	}
-
+	
+	/**
+	 * Loads the text domain.
+	 *
+	 * @return void
+	 */
+	public function i18n( ) {
+		$ok = load_plugin_textdomain( 'user-upgrade-capability', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/');
+	}
+		
 	/**
 	 * Provides an upgrade path for older versions of the plugin
 	 *
@@ -226,7 +234,7 @@ class UUC {
 		$plugin_version = $plugin_data['Version'];	
 		return filter_var($plugin_version, FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
 	}
-
+	
 	/**
 	 * Register Plugin Deactivation Hooks for all the currently 
 	 * enforced active extension plugins.
@@ -296,8 +304,8 @@ class UUC {
 		if ( ! empty( $plugin_message ) ) {
 			?>
 			<div class="error">
-				  <p><?php esc_html_e(sprintf( __( 'Error the %1$s plugin is forced active with ', 'user-upgrade-capability-text-domain'), $plugin)); ?>
-				  <a href="options-general.php?page=<?php echo $this->menu ; ?>&tab=uuc_plugin_extension"> <?php echo esc_html(__( 'User Upgrade Capability Settings!', 'user-upgrade-capability-text-domain')); ?> </a></p>
+				  <p><?php esc_html_e(sprintf( __( 'Error the %1$s plugin is forced active with ', 'user-upgrade-capability'), $plugin)); ?>
+				  <a href="options-general.php?page=<?php echo $this->menu ; ?>&tab=uuc_plugin_extension"> <?php echo esc_html(__( 'User Upgrade Capability Settings!', 'user-upgrade-capability')); ?> </a></p>
 			</div>
 			<?php
 			update_option("uuc_deactivate_{$plugin}", false); 
@@ -339,18 +347,18 @@ class UUC {
 				?>
 				<div class="update-nag">
 					
-					<p><?php esc_html(printf( __("You've been using <b>Upgrade User Capability</b> for more than %s.  How about giving it a review by logging in at wordpress.org ?", 'user-upgrade-capability-text-domain'), human_time_diff( $plugin_user_start_date) )); ?>
+					<p><?php esc_html(printf( __("You've been using <b>Upgrade User Capability</b> for more than %s.  How about giving it a review by logging in at wordpress.org ?", 'user-upgrade-capability'), human_time_diff( $plugin_user_start_date) )); ?>
 				
 					</p>
 					<p>
 
-						<?php echo '<a href="' .  esc_url(add_query_arg( array( UUC_PROMPT_ARGUMENT => 'doing_now' )))  . '">' .  esc_html__( 'Yes, please take me there.', 'user-upgrade-capability-text-domain' ) . '</a> '; ?>
+						<?php echo '<a href="' .  esc_url(add_query_arg( array( UUC_PROMPT_ARGUMENT => 'doing_now' )))  . '">' .  esc_html__( 'Yes, please take me there.', 'user-upgrade-capability' ) . '</a> '; ?>
 						
-						| <?php echo ' <a href="' .  esc_url(add_query_arg( array( UUC_PROMPT_ARGUMENT => 'not_now' )))  . '">' .  esc_html__( 'Not right now thanks.', 'user-upgrade-capability-text-domain' ) . '</a> ';?>
+						| <?php echo ' <a href="' .  esc_url(add_query_arg( array( UUC_PROMPT_ARGUMENT => 'not_now' )))  . '">' .  esc_html__( 'Not right now thanks.', 'user-upgrade-capability' ) . '</a> ';?>
 						
 						<?php
 						if ( in_array(  "not_now", $user_responses ) || in_array(  "doing_now", $user_responses )) { 
-							echo '| <a href="' .  esc_url(add_query_arg( array( UUC_PROMPT_ARGUMENT => 'done_now' )))  . '">' .  esc_html__( "I've already done this !", 'user-upgrade-capability-text-domain' ) . '</a> ';
+							echo '| <a href="' .  esc_url(add_query_arg( array( UUC_PROMPT_ARGUMENT => 'done_now' )))  . '">' .  esc_html__( "I've already done this !", 'user-upgrade-capability' ) . '</a> ';
 						}?>
 
 					</p>
@@ -413,7 +421,7 @@ class UUC {
 	}
 	
 	public function override_wp_user_caps() {
-	//die();
+
 		$primary_ref_site = get_option('uuc_reference_site');
 
 		if ( !empty( $primary_ref_site ) && is_multisite() && ( get_current_blog_id() != $primary_ref_site ) ) {
@@ -456,7 +464,7 @@ class UUC {
 			}
 		}
 	}
-	
+		
 
 	/**
      * Creates or returns an instance of this class.

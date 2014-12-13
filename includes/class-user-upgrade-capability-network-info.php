@@ -73,7 +73,7 @@ class UUCNI {
 						$blog_url  = $blog_details->siteurl;
 						$blog_name = $blog_details->blogname;
 
-						$output .= '<li><nobr><a title="' . esc_attr( __( 'Manage User Upgrade Capability on ', 'user-upgrade-capability-text-domain' ) . $blog_name ) .'" href="'.esc_url( $blog_url ).'/wp-admin/users.php?page=uuc-settings">' . esc_html( $blog_name ) . '</a></nobr></li>';
+						$output .= '<li><nobr><a title="' . esc_attr( __( 'Manage User Upgrade Capability on', 'user-upgrade-capability' ) . " " . $blog_name ) .'" href="'.esc_url( $blog_url ).'/wp-admin/users.php?page=uuc-settings">' . esc_html( $blog_name ) . '</a></nobr></li>';
 					}
 
 					unset( $blog_details );
@@ -88,7 +88,7 @@ class UUCNI {
     /* Sites Page Functions *******************************************************/
 
     public function add_sites_column( $column_details ) {
-        $column_details['active_uuc_blogs'] = __( 'UUC Linked Sites', 'user-upgrade-capability-text-domain' ) . ' <span title="' . esc_attr( __( 'Upgrade User Capability - Linked Secondary Sites', 'user-upgrade-capability-text-domain' ) ) . '"></span>';
+        $column_details['active_uuc_blogs'] = __( 'UUC Linked Sites', 'user-upgrade-capability' ) . ' <span title="' . esc_attr( __( 'Upgrade User Capability - Linked Secondary Sites', 'user-upgrade-capability' ) ) . '"></span>';
 
         return $column_details;
     }
@@ -98,6 +98,7 @@ class UUCNI {
 
     // Get the database prefix
     static function get_blog_prefix( $blog_id=null ) {
+	
         global $wpdb;
 
         if ( null === $blog_id ) {
@@ -114,6 +115,7 @@ class UUCNI {
 
     // Get the list of blogs
     static function get_network_blog_list( ) {
+	
         global $wpdb;
 
 		// Fetch the list from the transient cache if available
@@ -200,6 +202,7 @@ class UUCNI {
 
     // Get the list of active plugins for a single blog
     static function get_active_plugins( $blog_id ) {
+	
         global $wpdb;
 
         $blog_prefix = self::get_blog_prefix( $blog_id );
@@ -224,6 +227,7 @@ class UUCNI {
 
     // Get the active theme for a single blog
     static function get_active_theme( $blog_id ) {
+	
         global $wpdb;
 
         $blog_prefix = self::get_blog_prefix( $blog_id );

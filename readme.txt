@@ -3,7 +3,7 @@ Contributors: justinticktock
 Tags: multisite, role, user, cms, groups, teams, access, capability, permission, security
 Requires at least: 3.5
 Tested up to: 4.0
-Stable tag: 1.2
+Stable tag: 1.2.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -20,6 +20,11 @@ One example of where this is helpful is for the case where you want multiple cal
 You can find more detail on the plugin at the [Plugin site](http://justinandco.com/plugins/user-upgrade-capabilities/).
 
 = WARNING = Activating this plugin on a site will replace the available user roles/capabilities with a copy from the reference site you will not be able to undo.
+
+Translation:
+
+* English
+* Serbo-Croatian, sr_RS ( props Borisa Djuraskovic [webhostinghub.com](http://webhostinghub.com) )
 
 Extensions:
 
@@ -41,9 +46,9 @@ If you select the options for extending functionality through other plugins the 
 
 == Screenshots ==
 
-1. The General Settings Screen.
-2. The Additional User Capabilities Settings Screen.
-3. The Plugin Extensions Settings Screen.
+1. General Settings Screen.
+2. Additional User Capabilities Settings Screen.
+3. Plugin Suggestions Settings Screen.
 
 == Changelog ==
 
