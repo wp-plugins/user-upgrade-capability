@@ -67,7 +67,7 @@ class UUC_Settings {
 		$config = array(
 				'default_tab_key' => 'uuc_general',					// Default settings tab, opened on first settings page open.
 				'menu_parent' => 'users.php',    					// menu options page slug name.
-				'menu_access_capability' => 'manage_network_users',    					// menu options page slug name.
+				'menu_access_capability' => 'list_users', 			// menu options page slug name.
 				'menu' => $upgrade_user->menu,    					// menu options page slug name.
 				'menu_title' => $upgrade_user->menu_title,    		// menu options page slug name.
 				'page_title' => $upgrade_user->page_title,    		// menu options page title.
@@ -76,6 +76,7 @@ class UUC_Settings {
 		$settings = 	apply_filters( 'uuc_settings',
 			array(
 				'uuc_general' => array(
+					'access_capability' => 'manage_network_users',
 					'title' 		=> __( 'General', 'user-upgrade-capability' ),
 					'description' 	=> __( 'The "User Upgrade Capability" plugin simplifies the administration of user capabilities and allows several sites/blogs to have access rights cascaded out from one reference site.', 'user-upgrade-capability' ),
 					'settings' 		=> array(		
@@ -95,6 +96,7 @@ class UUC_Settings {
 										),										
 				),
 				'uuc_user_capabilities' => array(
+					'access_capability' => 'promote_users',
 					'title' 		=> __( 'User Capability', 'user-upgrade-capability' ),
 					'description' 	=> __( 'Define here the capabilities that a user will receive for this site if they already have a single "key" capability on a reference site/blog within the multi-site network.  On user login to the current local site the plugin will expand the local capabilities to include those listed below. If the "key" reference capability is removed from the user at the reference site then all capabilities will be removed from this site the user will need to re-enrole.', 'user-upgrade-capability' ),
 					'settings' 		=> array(														
@@ -110,6 +112,7 @@ class UUC_Settings {
 										),										
 				),
 				'uuc_plugin_extension' => array(
+						'access_capability' => 'install_plugins',
 						'title' 		=> __( 'Plugin Suggestions', 'user-upgrade-capability' ),
 						'description' 	=> __( 'Most Plugins listed here are intended for use with the "Upgrade Use Capability" plugin.  Selection of a plugin will prompt you through the installation and the plugin will be forced network active while this is selected; deselecting will not remove the plugin, you will need to manually deactiate and uninstall from the network.', 'user-upgrade-capability' ),					
 						'settings' 		=> array(

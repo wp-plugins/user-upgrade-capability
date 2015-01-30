@@ -3,14 +3,16 @@
 Plugin Name: User Upgrade Capability
 Plugin URI: http://justinandco.com/plugins/user-upgrade-capabilities/
 Description: Link multiple network sites/blogs together - Maintain only one site list of users.
-Version: 1.2.1.1
+Version: 1.2.1.2
 Author: Justin Fletcher
 Author URI: http://justinandco.com
 Domain Path: /languages/
 License: GPLv2 or later
 */
 
-if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly
+}
 
 /**
  * UUC class.
@@ -146,7 +148,8 @@ class UUC {
 		// Admin notice hide prompt notice catch
 		$this->catch_hide_notice();
 
-		if ( empty($plugin_current_version) || $plugin_current_version < $plugin_new_version ) {
+		//if ( empty($plugin_current_version) || $plugin_current_version < $plugin_new_version ) {
+		if ( version_compare( $plugin_current_version, $plugin_new_version, '<' ) ) {
 		
 			$plugin_current_version = isset( $plugin_current_version ) ? $plugin_current_version : 0;
 
