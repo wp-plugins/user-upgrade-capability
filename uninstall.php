@@ -4,18 +4,19 @@
 if ( !defined( 'WP_UNINSTALL_PLUGIN' ) )
 	exit ();
 	
-if (is_multisite()) {
-    global $wpdb;
-    $blogs = $wpdb->get_results("SELECT blog_id FROM {$wpdb->blogs}", ARRAY_A);
-    if ($blogs) {
-        foreach($blogs as $blog) {
-            switch_to_blog($blog['blog_id']);
-			uuc_clean_database();
+if ( is_multisite( ) ) {
+
+    $blogs = wp_list_pluck( wp_get_sites(), 'blog_id' );
+
+    if ( $blogs ) {
+        foreach( $blogs as $blog ) {
+            switch_to_blog( $blog );
+            uuc_clean_database();
         }
         restore_current_blog();
     }
 } else {
-		uuc_clean_database();
+	uuc_clean_database();
 }
 
 // remove all network-wide transients
